@@ -63,6 +63,7 @@ def route_controller(user):
 @socketio.on('disconnect')
 def event_disconnect():
     removePlayer()
+    removePlayer()
 
 @socketio.on('create-new-game')
 def event_create_new_game(json):
@@ -135,6 +136,9 @@ def event_request_game_join(json):
     if not isGameStarted(game_id):
         addPlayerToGame(game_id, player_id)
     
+    if not isGameStarted(game_id):
+        addPlayerToGame(game_id, player_id)
+    
     join_room(game_id)
 
     emit('joined-game-successfully', games[game_id], to=request.sid)
@@ -150,7 +154,28 @@ def event_request_game_lobby(json):
         emit('game-not-found', {
             'game_id': game_id
         }, to=game_id)
+    try:
+        emit('update-game-lobby', getGameState(game_id), to=game_id)
+    except Exception as e:
+        # TODO implement functionality to remove game info
+        emit('game-not-found', {
+            'game_id': game_id
+        }, to=game_id)
 
+@socketio.on('request-game-start')
+def event_request_game_start(json):
+    game_id = json['game_id']
+
+    sleep(random.random() * 1)
+
+    if isGameStarted(game_id) or not isPlayerCountSufficient(game_id):
+        return
+    
+    games[game_id]['started'] = True
+
+    emit('update-game-list', getSanitizedGames(), to=request.sid)
+
+    emit('game-started', getGameState(game_id), to=game_id)
 @socketio.on('request-game-start')
 def event_request_game_start(json):
     game_id = json['game_id']
@@ -189,6 +214,29 @@ def event_request_new_round(json):
 @socketio.on('request-round-end')
 def event_request_new_round(json):
     pass
+@socketio.on('request-new-round')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-countdown-timer')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-gamestate')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-player-click')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-player-answer')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-round-end')
+def event_request_new_round(json):
+    pass
 
 # HELPFUL GAME FUNCTIONS
 def isGamePasswordLocked(game_id):
@@ -197,6 +245,9 @@ def isGamePasswordLocked(game_id):
     except Exception as e:
         pprint(traceback.format_exc(e))
         return None
+
+def isGameStarted(game_id):
+    return games[game_id]['started']
 
 def isGameStarted(game_id):
     return games[game_id]['started']
@@ -210,9 +261,29 @@ def getGameState(game_id):
         'players': [player for player in players.values() if player['id'] in games[game_id]['players']]
     }
 
+def getGameState(game_id):
+    return {
+        'game_state': games[game_id],
+        'players': [player for player in players.values() if player['id'] in games[game_id]['players']]
+    }
+
 def getPlayersInGame(game_id):
     return [player for player in players.values() if player in games[game_id]['players']]
 
+def removePlayer(player_id=None, player_sid=None):
+    pass
+
+def isPlayerCountSufficient(game_id):
+    return len(games[game_id]['players']) > 1
+
+def getSanitizedGames():
+    sanitized_games = [game for game in games.values() if game['started'] == False]
+    for game in sanitized_games:
+        pw = game.get('password')
+        game['password'] = pw != None and pw != False
+        game['creator_sid'] = None
+
+    return sanitized_games
 def removePlayer(player_id=None, player_sid=None):
     pass
 
