@@ -2,7 +2,7 @@ window.sleep = async (time) => {
     return new Promise(resolve => setTimeout(resolve, time))
 }
 
-window.pad = (number, padding) => {
+window.pad = (number, padding = 3) => {
     let zeroPad = '0'.repeat(padding)
     return (zeroPad + number).slice(-1 * padding)
 }

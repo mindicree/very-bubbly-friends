@@ -7,10 +7,17 @@ document.addEventListener('alpine:init', () => {
         scene: 'loading',
         socket: null,
         gameState: {
-            player: {},
-            map: {},
+            
         },
-        requestInterval: null,
+        player: {
+
+        },
+        newGame: {
+            name: '',
+            rounds: 3,
+            round_duration: 120,
+            max_players: 20,
+        },
         canPlayAudio: false,
         audioEngine: {
             bgmMain: new Audio('/static/mp3/bgm.mp3'),
@@ -32,11 +39,14 @@ document.addEventListener('alpine:init', () => {
                     if (this.canPlayAudio === false) {
                         this.canPlayAudio = true;
                         await(1000);
-                        this.playSound('bgmMain', true, 0.75)
+                        // this.playSound('bgmMain', true, 0.75)
                     }
                 })
 
+                await sleep(1000);
+
                 // CHANGE SCENE
+                this.loading = false;
                 this.setCurrentScene('home')
             })
 

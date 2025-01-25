@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         virus: ['Virus', 'sans-serif'],
+        bubble: ['Bubble', 'sans-serif'],
       }
     },
   },

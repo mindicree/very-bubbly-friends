@@ -11,7 +11,7 @@ export default defineConfig({
       input: [
         "src/js/app.js",
         "src/css/app.css",
-        "src/fonts/virus.otf",
+        "src/fonts/shine_bubble.ttf",
       ],
       output: {
         entryFileNames: `dist/[name].js`,

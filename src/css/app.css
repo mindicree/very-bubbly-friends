@@ -12,6 +12,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Bubble';
+    src: url('shine_bubble.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 
     Scene classes
 */
@@ -43,6 +50,8 @@
     Dialog Modal Stuff 
 */
 dialog {
+    @apply bg-cyan-500 rounded-lg max-w-screen-md w-11/12;
+
     display: block;
     opacity: 0;
     pointer-events: none;
@@ -73,6 +82,18 @@ dialog::backdrop {
 /* 
     Disabled items
 */
+
+input {
+    @apply p-2 outline-none border-2 hover:border-pink-300 focus:border-pink-400 rounded text-black accent-pink-400;
+}
+
 input:disabled, button:disabled {
     opacity: 0.25;
+}
+
+/*
+    Buttons
+*/
+button {
+    @apply p-2 rounded mx-auto bg-gradient-to-r from-cyan-300 to-pink-400 min-w-40 hover:scale-105 transition ease-in-out duration-100 shadow-md;
 }
