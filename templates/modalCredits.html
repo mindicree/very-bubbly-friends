@@ -1,0 +1,34 @@
+<dialog x-ref="modalCredits">
+    <div class="flex text-white">
+        <div class="flex flex-col p-6 w-full h-full gap-2 md:gap-3">
+            <div class="flex flex-row justify-between w-full">
+                <h4 class="bold text-xl md:text-4xl my-auto">Credits</h4>
+                <button x-on:click="$refs.modalCredits.close()" class="rounded-full bg-none lg:opacity-50 lg:hover:opacity-100 min-w-0 w-12 h-12 mr-0 text-lg">
+                    X
+                </button>
+            </div>
+            <hr>
+            <div class="min-h-[50hv] h-[10000px] max-h-[60vh] md:max-h-[55vh]">
+                <div class="flex flex-col gap-4 relative h-full">
+                    <p class="text-base md:text-xl">
+                        Concept and Design: Tyler Johnson
+                    </p>
+                    <p class="text-base md:text-xl">
+                        Programming: Tyler Johnson
+                    </p>
+                    <p class="text-base md:text-xl">
+                        Music and SFX: Tyler Johnson
+                    </p>
+                    <p class="absolute bottom-0 text-base md:text-xl">
+                        Special Thanks to Global Game Jam 2025
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="w-full flex flex-row justify-between m-auto">
+                <div></div>
+                <button x-on:click="$refs.modalCredits.close()">Close</button>
+            </div>
+        </div>
+    </div>
+</dialog>

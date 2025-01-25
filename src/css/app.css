@@ -111,3 +111,77 @@ button {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
+
+/* 
+    Title Pulse
+*/
+@keyframes pulse {
+    0% { scale: 100%; }
+    50% { scale: 120%; }
+    100% { scale: 100%; }
+}
+
+@keyframes pulse-sm {
+    0% { scale: 100%; }
+    50% { scale: 125%; }
+    100% { scale: 100%; }
+}
+
+@keyframes float {
+    0% {
+        opacity: 0;
+        transform: translateY(50%)
+    }
+
+    10% {
+        opacity: 0.25;
+    }
+
+    90% {
+        transform: translateY(calc(-150vh));
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+.pulse-small {
+    animation: pulse-sm 5s ease-in-out 0s infinite normal forwards;
+}
+
+.title-pulse {
+    animation: pulse 2s ease-in-out 0s infinite normal forwards;
+}
+
+.general-pulse {
+    animation: pulse 5s ease-in-out 0s infinite normal forwards;
+}
+
+/* 
+    Bubble
+*/
+
+.bubble {
+    border-radius: 50%;
+    position: relative;
+
+    background: radial-gradient(
+        circle at 75% 30%,
+        white 5px,
+        aqua 8%,
+        darkblue 60%,
+        aqua 100%
+    );
+    box-shadow: inset 0 0 20px #fff, inset 10px 0 46px #eaf5fc,
+        inset 88px 0px 60px #c2d8fe, inset -20px -60px 100px #fde9ea,
+        inset 0 50px 140px #fde9ea, 0 0 90px #fff;
+}
+
+.floating-bubble {
+    animation-name: float;
+    animation-timing-function: ease-in-out;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}

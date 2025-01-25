@@ -62,8 +62,7 @@ def route_controller(user):
 ### SOCKETS ###
 @socketio.on('disconnect')
 def event_disconnect():
-    # TODO remove from rooms, games, and player lists
-    leave_room()
+    removePlayer()
 
 @socketio.on('create-new-game')
 def event_create_new_game(json):
@@ -124,13 +123,7 @@ def event_create_new_player(json):
 
 @socketio.on('request-game-list')
 def event_request_game_list():
-    sanitized_games = [game for game in games.values() if game['started'] == False]
-    for game in sanitized_games:
-        pw = game.get('password')
-        game['password'] = pw != None and pw != False
-        game['creator_sid'] = None
-    
-    emit('update-game-list', sanitized_games, to=request.sid)
+    emit('update-game-list', getSanitizedGames(), to=request.sid)
 
 @socketio.on('request-game-join')
 def event_request_game_join(json):
@@ -139,29 +132,63 @@ def event_request_game_join(json):
 
     # TODO check if password locked and if so, check password
 
-    addPlayerToGame(game_id, player_id)
+    if not isGameStarted(game_id):
+        addPlayerToGame(game_id, player_id)
+    
     join_room(game_id)
 
     emit('joined-game-successfully', games[game_id], to=request.sid)
-
-    pprint(game_id)
-    pprint(games[game_id])
 
 @socketio.on('request-game-lobby')
 def event_request_game_lobby(json):
     game_id = json['game_id']
 
-    pprint(players)
+    try:
+        emit('update-game-lobby', getGameState(game_id), to=game_id)
+    except Exception as e:
+        # TODO implement functionality to remove game info
+        emit('game-not-found', {
+            'game_id': game_id
+        }, to=game_id)
 
-    emit('update-game-lobby', {
-        'game_state': games[game_id],
-        'players': [player for player in players.values() if player['id'] in games[game_id]['players']]
-    }, to=game_id)
+@socketio.on('request-game-start')
+def event_request_game_start(json):
+    game_id = json['game_id']
 
-    pprint(game_id)
-    pprint(games[game_id])
+    sleep(random.random() * 1)
 
+    if isGameStarted(game_id) or not isPlayerCountSufficient(game_id):
+        return
+    
+    games[game_id]['started'] = True
 
+    emit('update-game-list', getSanitizedGames(), to=request.sid)
+
+    emit('game-started', getGameState(game_id), to=game_id)
+
+@socketio.on('request-new-round')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-countdown-timer')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-gamestate')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-player-click')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-player-answer')
+def event_request_new_round(json):
+    pass
+
+@socketio.on('request-round-end')
+def event_request_new_round(json):
+    pass
 
 # HELPFUL GAME FUNCTIONS
 def isGamePasswordLocked(game_id):
@@ -170,12 +197,37 @@ def isGamePasswordLocked(game_id):
     except Exception as e:
         pprint(traceback.format_exc(e))
         return None
+
+def isGameStarted(game_id):
+    return games[game_id]['started']
     
 def addPlayerToGame(game_id, player_id):
     games[game_id]['players'].append(player_id)
 
+def getGameState(game_id):
+    return {
+        'game_state': games[game_id],
+        'players': [player for player in players.values() if player['id'] in games[game_id]['players']]
+    }
+
 def getPlayersInGame(game_id):
     return [player for player in players.values() if player in games[game_id]['players']]
+
+def removePlayer(player_id=None, player_sid=None):
+    pass
+
+def isPlayerCountSufficient(game_id):
+    return len(games[game_id]['players']) > 1
+
+def getSanitizedGames():
+    sanitized_games = [game for game in games.values() if game['started'] == False]
+    for game in sanitized_games:
+        pw = game.get('password')
+        game['password'] = pw != None and pw != False
+        game['creator_sid'] = None
+
+    return sanitized_games
+
 
 
 # RUN

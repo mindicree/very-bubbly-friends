@@ -1,0 +1,86 @@
+<div class="scene" x-bind:class="isCurrentScene('home') ? 'scene-active' : 'scene-inactive'">
+    <div class="flex flex-col gap-12 justify-end h-1/2 m-auto">
+        <div class="flex flex-col m-auto gap-6 md:gap-8">
+            <h1 class="m-auto text-3xl md:text-6xl text-shadow text-center" style="text-shadow: 0.5rem 0.5rem 1rem black;">
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-row">
+                        <div class="title-letter">
+                            <span>V</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>e</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>r</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>y</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row">
+                        <div class="title-letter">
+                            <span>B</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>u</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>b</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>b</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>l</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>y</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row">
+                        <div class="title-letter">
+                            <span>F</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>r</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>i</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>e</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>n</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>d</span>
+                        </div>
+                        <div class="title-letter">
+                            <span>s</span>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    let titleLetters = Array.from(document.getElementsByClassName('title-letter'));
+                    titleLetters.forEach((el, index) => {
+                        el.style.animationDelay = `${index/10}s`;
+                        el.classList.add('title-pulse');
+                    })
+                </script>
+            </h1>
+            <h2 class="m-auto text-lg md:text-2xl lg:text-3xl text-center max-w-screen-sm" style="text-shadow: 0.5rem 0.5rem 1rem black;">The Bubbliest Trivia Game Around!</h2>
+        </div>
+        <div class="flex flex-col gap-4 m-auto w-full">
+            <div class="flex flex-col md:flex-row gap-4 m-auto w-full md:py-4">
+                <button @click="$refs.modalJoinGame.showModal(); $refs.inputNewPlayerName.focus()" class="md:text-4xl md:p-6 md:min-w-52">Join</button>
+                <span class="hidden md:inline my-auto text-4xl">OR</span>
+                <button @click="$refs.modalCreateGame.showModal()" class="md:text-4xl md:p-6 md:min-w-52">Create</button>
+            </div>
+            <button @click="$refs.modalHowToPlay.showModal()">How To Play</button>
+            <button @click="$refs.modalCredits.showModal()">Credits</button>
+        </div>
+    </div>
+</div>

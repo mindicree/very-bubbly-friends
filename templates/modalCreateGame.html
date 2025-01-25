@@ -1,0 +1,59 @@
+<dialog x-ref="modalCreateGame">
+    <div class="flex text-white">
+        <div class="flex flex-col p-6 w-full h-full gap-2 md:gap-3">
+            <div class="flex flex-row justify-between w-full">
+                <h4 class="bold text-xl md:text-4xl my-auto">New Game</h4>
+                <button x-on:click="$refs.modalCreateGame.close()" class="rounded-full bg-none lg:opacity-50 lg:hover:opacity-100 min-w-0 w-12 h-12 mr-0 text-lg my-auto">
+                    X
+                </button>
+            </div>
+            <hr>
+            <div class="min-h-[50hv] h-fit max-h-[60vh] md:max-h-[55vh] relative">
+                <form id="newGameForm" class="flex flex-col gap-4 relative h-full" onsubmit="return false">
+                    <div class="flex flex-col md:flex-row w-full justify-between">
+                        <label for="new-game-name" class="my-auto">Room Name</label>
+                        <div class="w-full md:w-1/2 flex flex-row gap-4">
+                            <!-- TODO focus this on open dialog -->
+                            <!-- TODO enter moves to next dialog -->
+                            <input id="new-game-name" x-model="newGame.name" maxlength="32" class="w-full" x-bind:disabled="loading">
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row w-full justify-between">
+                        <label for="new-game-password" class="my-auto">Room Password</label>
+                        <div class="w-full md:w-1/2 flex flex-row gap-4">
+                            <!-- TODO enter submits the form -->
+                            <input id="new-game-password" x-model="newGame.password" type="password" class="w-full" x-bind:disabled="loading">
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row w-full justify-between">
+                        <label for="new-game-rounds" class="my-auto">Rounds</label>
+                        <div class="w-full md:w-1/2 flex flex-row gap-4">
+                            <input id="new-game-rounds" x-model="newGame.rounds" type="range" min="1" max="10" step="1" class="my-auto w-full" x-bind:disabled="loading">
+                            <output for="new-game-rounds" x-text="pad(newGame.rounds)" class="my-auto"></output>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row w-full justify-between">
+                        <label for="new-game-round_duration" class="my-auto">Round Duration (s)</label>
+                        <div class="w-full md:w-1/2 flex flex-row gap-4">
+                            <input id="new-game-round_duration" x-model="newGame.round_duration" type="range" min="60" max="300" step="10" class="my-auto w-full" x-bind:disabled="loading">
+                            <output x-text="pad(newGame.round_duration)" class="my-auto"></output>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row w-full justify-between">
+                        <label class="my-auto">Max Players</label>
+                        <div class="w-full md:w-1/2 flex flex-row gap-4">
+                            <input id="new-game-max_players" x-model="newGame.max_players" type="range" min="5" max="50" step="5" class="my-auto w-full" x-bind:disabled="loading">
+                            <output x-text="pad(newGame.max_players)" class="my-auto"></output>
+                        </div>
+                    </div>
+                </form>
+                <span class="absolute bottom-3 text-red-500" x-text="newGameErrorMessage"></span>
+            </div>
+            <hr>
+            <div class="w-full flex flex-row justify-between m-auto">
+                <div></div>
+                <button x-bind:disabled="loading" x-on:click="createNewGame()">Create</button>
+            </div>
+        </div>
+    </div>
+</dialog>

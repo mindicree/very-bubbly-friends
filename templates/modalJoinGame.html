@@ -1,0 +1,38 @@
+<dialog x-ref="modalJoinGame" class="max-w-screen-sm">
+    <div class="flex text-white">
+        <div class="flex flex-col p-6 w-full h-full gap-2 md:gap-3">
+            <div class="flex flex-row justify-between w-full">
+                <h4 class="bold text-xl md:text-4xl my-auto">Hi Bubble Buddy!</h4>
+                <button x-on:click="$refs.modalJoinGame.close()" class="rounded-full bg-none lg:opacity-50 lg:hover:opacity-100 min-w-0 w-12 h-12 mr-0 text-lg">
+                    X
+                </button>
+            </div>
+            <hr>
+            <div class="min-h-[50hv] max-h-[65vh] md:h-fit md:max-h-[55vh]">
+                <form id="newPlayerForm" class="flex flex-col gap-4 relative w-full" onsubmit="return false">
+                    <div class="flex flex-col gap-2 w-full my-3">
+                        <label for="new-player-name" class="my-auto">Name</label>
+                        <div class="w-full flex flex-row gap-4">
+                            <!-- TODO focus when dialog is opened -->
+                            <!-- TODO enter submits the form -->
+                            <input 
+                                x-ref="inputNewPlayerName" 
+                                id="new-player-name" 
+                                x-model="player.name" 
+                                maxlength="32" 
+                                class="w-full" 
+                                x-bind:disabled="loading"
+                                x-on:keypress.enter="createNewPlayer()"
+                            >
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="w-full flex flex-row justify-between m-auto">
+                <div></div>
+                <button x-on:click="createNewPlayer()" x-bind:disabled="loading">Games</button>
+            </div>
+        </div>
+    </div>
+</dialog>

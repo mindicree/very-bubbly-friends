@@ -41,12 +41,38 @@ document.addEventListener('alpine:init', () => {
             this.socket.on('connect', async () => {
                 console.log('Socket connected')
 
-                // CHECK PLAYER STATUS
-
                 // SET ANY POLLING INTERVALS
                 this.gameListFetchInterval = setInterval(() => {
                     this.socket.emit('request-game-list');
                 }, 3000);
+
+                setInterval(() => {
+                    if(Math.random() < 0.25) {
+                        console.log('making a bubble')
+
+                        let newBubbleContainer = document.createElement('div')
+                        let newBubble = document.createElement('div')
+
+                        newBubble.classList.add('bubble', 'pulse-small');
+                        let size = Math.floor(window.screen.width / 15 * Math.random())
+                        newBubble.style.width=`${size}px`;
+                        newBubble.style.height=`${size}px`;
+
+                        let newBubbleFloatTime = Math.random() * 10 + 10;
+                        newBubbleContainer.style.animationDuration = `${newBubbleFloatTime}s`;
+                        newBubbleContainer.classList.add('absolute', 'bottom-0');
+                        let xPos = Math.floor(Math.random() * window.screen.width)
+                        newBubbleContainer.style.left = `${xPos}px`
+
+                        newBubbleContainer.appendChild(newBubble)
+                        this.$refs.bubbleBackgroundContainer.appendChild(newBubbleContainer);
+                        newBubbleContainer.classList.add('floating-bubble');
+
+                        setTimeout(() => {
+                            newBubbleContainer.remove();
+                        }, newBubbleFloatTime * 1000 + 3000);
+                    }
+                }, 100);
 
                 // INITIALIZE AUDIO
                 window.addEventListener('mouseover', async () => {
@@ -142,6 +168,11 @@ document.addEventListener('alpine:init', () => {
             }
 
             this.socket.emit('request-game-join', data);
+        },
+        startGame() {
+            this.socket.emit('request-game-start', {
+                game_id: this.gameState['id'],
+            })
         },
         // LOCAL STATE GAME FUNCTIONS
         // SCENE FUNCTIONS
