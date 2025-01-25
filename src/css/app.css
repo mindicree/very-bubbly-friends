@@ -97,3 +97,17 @@ input:disabled, button:disabled {
 button {
     @apply p-2 rounded mx-auto bg-gradient-to-r from-cyan-300 to-pink-400 min-w-40 hover:scale-105 transition ease-in-out duration-100 shadow-md;
 }
+
+.scroll::-webkit-scrollbar {
+    width: 16px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}

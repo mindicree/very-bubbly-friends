@@ -1,16 +1,18 @@
 from flask import Flask, request , render_template
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_htpasswd import HtPasswdAuth
 import random
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta
+from time import sleep
 import yaml
 import json
 import os
 import copy
 import jsonpickle
 import secrets
-import pprint
+from pprint import pprint
 import traceback
+import requests
 
 from utilities import *
 from models import *
@@ -42,7 +44,8 @@ def createsession():
     return Session(engine)
 
 # GAME DATA
-gameState = {}
+games = {}
+players = {}
 
 ### ROUTES ###
 # Main Route: for the main game
@@ -57,40 +60,124 @@ def route_controller(user):
     return render_template('controller.html')
 
 ### SOCKETS ###
-@socketio.on('request-game-state')
-def event_request_game_state(json):
-    pprint.pprint(json)
-    emit('update-game-state', gameState, to=request.sid)
+@socketio.on('disconnect')
+def event_disconnect():
+    # TODO remove from rooms, games, and player lists
+    leave_room()
+
+@socketio.on('create-new-game')
+def event_create_new_game(json):
+    pprint(json)
+    try:
+        # VALIDATE CURRENT DATA
+        json['name'] = json['name'] if len(str(json['name'])) <= 32 else str(json['name'])[0:32]
+        if len(json['name']) < 1:
+            json['name'] = getID(3)
+        json['password'] = json.get('password')
+        json['rounds'] = min(max(1, json['rounds']), 10)
+
+        # CREATE APPROPRIATE GAME DATA
+        json['id'] = getID()
+        json['players'] = []
+        json['started'] = False
+        json['current_round'] = 0
+        json['creator_sid'] = request.sid
+
+        # ADD TO GAME LIST
+        pprint(json)
+        games[json['id']] = json
+
+        # ADD CREATOR TO NEW ROOM
+        join_room(json['id'])
+
+        # CONFIRM GAME STATUS AND SEND TO LOBBY
+        emit('game-creation-successful', json, to=request.sid)
+    except Exception as e:
+        pprint(traceback.format_exc(e))
+        emit('game-creation-failed', {'message': e}, to=request.sid)
 
 @socketio.on('create-new-player')
 def event_create_new_player(json):
-    # DATABASE METHOD
+    pprint(json)
     try:
-        session = createsession()
-        new_player = session.query(User).filter(User.discord_id == str(message.author.id)).one_or_none()
-        if new_player == None:
-            new_player = User(
-                name=json['name']
-            )
-            session.add(new_player)
-            session.commit()
-    except Exception:
-        traceback.print_exc()
-    finally:
-        session.close()
+        if len(str(json['name'])) <= 0:
+            res = requests.get('https://randomuser.me/api/')
+            if res.ok:
+                try:
+                    result = res.json()['results'][0]['name']
+                    json['name'] = result['first'] + ' ' + result['last']
+                except Exception as e:
+                    pprint(traceback.format_exc(e))
+                    json['name'] = getID()
+            else:
+                json['name'] = getID()
+        json['id'] = getID()
+        json['score'] = 0
+        json['sid'] = request.sid
 
-    # GAMESTATE METHOD
-    rand_id = getID()
-    new_player = {
-        'id': rand_id,
-        'sid': request.sid,
-        'name': json['name'],
-        'score': 0,
-    }
-    gameState['players'][rand_id] = new_player
+        players[json['id']] = json
 
-    emit('event_new_player_added_successfully', new_player, to=request.sid)
+        emit('player-creation-successful', json, to=request.sid)
+    except Exception as e:
+        pprint(traceback.format_exc(e))
+        emit('player-creation-failed', {'message': e}, to=request.sid)
+
+@socketio.on('request-game-list')
+def event_request_game_list():
+    sanitized_games = [game for game in games.values() if game['started'] == False]
+    for game in sanitized_games:
+        pw = game.get('password')
+        game['password'] = pw != None and pw != False
+        game['creator_sid'] = None
+    
+    emit('update-game-list', sanitized_games, to=request.sid)
+
+@socketio.on('request-game-join')
+def event_request_game_join(json):
+    game_id = json['game_id']
+    player_id = json['player_id']
+
+    # TODO check if password locked and if so, check password
+
+    addPlayerToGame(game_id, player_id)
+    join_room(game_id)
+
+    emit('joined-game-successfully', games[game_id], to=request.sid)
+
+    pprint(game_id)
+    pprint(games[game_id])
+
+@socketio.on('request-game-lobby')
+def event_request_game_lobby(json):
+    game_id = json['game_id']
+
+    pprint(players)
+
+    emit('update-game-lobby', {
+        'game_state': games[game_id],
+        'players': [player for player in players.values() if player['id'] in games[game_id]['players']]
+    }, to=game_id)
+
+    pprint(game_id)
+    pprint(games[game_id])
+
+
+
+# HELPFUL GAME FUNCTIONS
+def isGamePasswordLocked(game_id):
+    try:
+        return games[game_id]['password'] != None
+    except Exception as e:
+        pprint(traceback.format_exc(e))
+        return None
+    
+def addPlayerToGame(game_id, player_id):
+    games[game_id]['players'].append(player_id)
+
+def getPlayersInGame(game_id):
+    return [player for player in players.values() if player in games[game_id]['players']]
+
 
 # RUN
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, host=config['FLASK_HOST'], port=config['FLASK_PORT'], debug=config['FLASK_DEBUG'])

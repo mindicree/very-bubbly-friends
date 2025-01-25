@@ -6,11 +6,11 @@ document.addEventListener('alpine:init', () => {
         loading: true,
         scene: 'loading',
         socket: null,
-        gameState: {
-            
-        },
-        player: {
+        canPlayAudio: false,
 
+        gameState: null,
+        player: {
+            name: '',
         },
         newGame: {
             name: '',
@@ -18,11 +18,22 @@ document.addEventListener('alpine:init', () => {
             round_duration: 120,
             max_players: 20,
         },
-        canPlayAudio: false,
+        newGameErrorMessage: '',
+        gameCreator: false,
+        
+        gameList: [],
+        gameListFetchInterval: null,
+        gamePassword: '',
+
+        inLobby: false,
+        lobbyFetchInterval: null,
+
         audioEngine: {
             bgmMain: new Audio('/static/mp3/bgm.mp3'),
         },
         async init() {
+            // TODO load last used name and game settings into game
+
             // INITIALIZE SOCKET CONNECTION
             this.socket = io()
 
@@ -33,6 +44,9 @@ document.addEventListener('alpine:init', () => {
                 // CHECK PLAYER STATUS
 
                 // SET ANY POLLING INTERVALS
+                this.gameListFetchInterval = setInterval(() => {
+                    this.socket.emit('request-game-list');
+                }, 3000);
 
                 // INITIALIZE AUDIO
                 window.addEventListener('mouseover', async () => {
@@ -50,18 +64,84 @@ document.addEventListener('alpine:init', () => {
                 this.setCurrentScene('home')
             })
 
+            //////////////////////
             // SOCKET GAME EVENTS
-            this.socket.on('update-game-state', (json) => {
-                this.updateGameState(json);
+            /////////////////////
+            // GAME CREATION
+            this.socket.on('game-creation-successful', json => {
+                this.gameState = json;
+                this.gameCreator = true;
+                console.log('Game creation successful');
+                this.$refs.modalCreateGame.close();
+                this.setCurrentScene('lobby');
+                this.loading = false;
+            })
+            this.socket.on('game-creation-failed', json => {
+                this.newGameErrorMessage = json.message;
+                this.loading = false;
+                console.log('Game creation failed');
+            })
+            this.socket.on('update-game-list', json => {
+                this.gameList = json;
+            })
+            this.socket.on('joined-game-successfully', json => {
+                console.log('Joined games successfully');
+                console.log(json);
+                this.gameState = json;
+                this.setCurrentScene('lobby');
+                this.inLobby = true;
+                this.lobbyFetchInterval = setInterval(() => {
+                    if(this.inLobby) {
+                        this.socket.emit('request-game-lobby', {
+                            game_id: this.gameState['id']
+                        });
+                    }
+                }, 1000)
+            })
+            this.socket.on('update-game-lobby', json => {
+                this.gameState = json['game_state']
+                this.gameState['players'] = json['players'];
+                console.log(json)
+            })
+            // PLAYER CREATION
+            // GAME CREATION
+            this.socket.on('player-creation-successful', json => {
+                this.player = json;
+                console.log('Player creation successful');
+                this.socket.emit('request-game-list');
+                this.$refs.modalJoinGame.close();
+                this.setCurrentScene('gameList');
+                this.loading = false;
+            })
+            this.socket.on('game-creation-failed', json => {
+                this.newPlayerErrorMessage = json.message;
+                this.loading = false;
+                console.log('Game creation failed');
             })
         },
         // SOCKET EMITTING GAME FUNCTIONS
         createNewPlayer() {
-            // GET PLAYER NAME
+            this.loading = true;
+            this.socket.emit('create-new-player', this.player);
+        },
+        createNewGame() {
+            // TODO validate game
+            this.loading = true;
+            this.socket.emit('create-new-game', this.newGame);
+        },
+        joinGame(game, password=false) {
+            if (game.password && !password) {
+                this.$refs.modalGamePassword.showModal();
+                return;
+            }
 
-            // EMIT SOCKET CONNECTION
+            let data = {
+                game_id: this.game.id,
+                player_id: this.player.id,
+                password: this.gamePassword
+            }
 
-            // GO TO SOCKET EVENT AND SAVE LOCALLY
+            this.socket.emit('request-game-join', data);
         },
         // LOCAL STATE GAME FUNCTIONS
         // SCENE FUNCTIONS
