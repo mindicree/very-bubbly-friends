@@ -1,0 +1,46 @@
+<dialog x-ref="modalScores" class="max-w-screen-lg">
+    <template x-if="gameState && players && gameState['started']">
+        <div class="flex text-white">
+            <div class="flex flex-col p-6 w-full h-full gap-2 md:gap-3">
+                <div class="flex flex-row justify-between w-full">
+                    <h4 class="bold text-xl md:text-4xl my-auto">Top 10</h4>
+                </div>
+                <hr>
+                <div class="h-fit max-h-[75vh] md:h-fit md:max-h-[55vh] overflow-y-scroll md:overflow-y-auto">
+                    <div class="flex flex-col gap-4 relative h-full">
+                        <table class="w-full mx-auto">
+                            <tbody>
+                                <template x-for="(player, i) in players.sort((a,b) => b.score - a.score)">
+                                    <tr class="text-lg md:text-xl xxl:text-2xl bg-cyan-800">
+                                        <td 
+                                            x-text="pad(i+1, 2) + '.'" 
+                                            class="w-24 py-2 pl-3"
+                                        ></td>
+                                        <td 
+                                            x-text="player.name" 
+                                            class="py-3"
+                                        ></td>
+                                        <td 
+                                            class="w-20 py-2 text-center"
+                                        >
+                                            <span x-text="player.score"></span>
+                                        </td>
+                                        <td class="w-8 py-2 text-center">
+                                            |
+                                        </td>
+                                        <td class="w-20 py-2 text-center">
+                                            <span 
+                                                x-bind:class="player.score > player.previous_score ? 'text-green-500' : (player.score < player.previous_score ? 'text-red-500' : '')"
+                                                x-text="`${player.score > player.previous_score ? '+' : ''}${player.score - player.previous_score}`"
+                                            ></span>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</dialog>

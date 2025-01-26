@@ -8,3 +8,4 @@ static/dist/
 static/manifest.json
 config.yaml
 *.log
+logs/log

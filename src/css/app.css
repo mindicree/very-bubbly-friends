@@ -161,10 +161,12 @@ button {
 
 @keyframes reveal {
     from {
+        scale: 50%;
         opacity: 0;
     }
 
     to {
+        scale: 100%;
         opacity: 1;
     }
 }
@@ -210,8 +212,8 @@ button {
 
 .slow-reveal {
     animation-name: reveal;
-    animation-timing-function: linear;
-    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
     animation-direction: normal;
     animation-fill-mode: forwards;
 }
@@ -222,4 +224,16 @@ button {
     animation-duration: 2s;
     animation-direction: reverse;
     animation-fill-mode: forwards;
+}
+
+.bubble-burst {
+    animation-name: burst;
+    animation-timing-function: linear;
+    animation-duration: 0.25s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.text-shadow {
+    text-shadow: 0.5rem 0.5rem 1rem black
 }

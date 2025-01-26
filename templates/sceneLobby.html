@@ -1,11 +1,18 @@
 <div class="scene" x-bind:class="isCurrentScene('lobby') ? 'scene-active' : 'scene-inactive'">
     <template x-if="gameState">
         <div class="flex flex-col w-full h-screen relative">
-            <div class="m-auto w-11/12 max-w-screen-xl min-h-[80vh] bg-cyan-400 border-2 border-cyan-500 drop-shadow-lg flex flex-col gap-8 relative mx-auto">
-                <h3 class="text-xl md:text-4xl text-center my-3 mx-auto" x-text="gameState.name"></h3>
-                <div class="flex flex-wrap gap-12 max-h-[50vh] scroll w-11/12 mx-auto">
+            <div class="m-auto w-11/12 max-w-screen-xl min-h-[80vh] bg-cyan-400/80 border-2 border-cyan-500 drop-shadow-lg flex flex-col gap-8 relative mx-auto">
+                <h3 class="text-xl md:text-4xl xl:text-6xl text-center my-3 mx-auto text-shadow" x-text="gameState.name"></h3>
+                <div class="flex flex-wrap gap-x-6 md:gap-x-12 gap-y-3 max-h-[50vh] scroll w-11/12 mx-auto">
                     <template x-for="player in gameState.players">
-                        <span x-text="player.name" class="md:text-lg"></span>
+                        <div>
+                            <template x-if="player.name && player.name.length > 3">
+                                <div class="flex flex-row gap-3 md:gap-4">
+                                    <div class="w-6 md:w-8 h-6 md:h-8 border-2 border-black my-auto rounded-full" :style="{ 'background-color': player.color }"></div>
+                                    <span x-text="player.name" class="md:text-lg lg:text-xl xl:text-2xl my-auto"></span>
+                                </div>
+                            </template>
+                        </div>                        
                     </template>
                 </div>
                 <div class="absolute bottom-3 w-full flex">

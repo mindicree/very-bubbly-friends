@@ -11,6 +11,14 @@ window.toCapitalCase = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-Array.prototype.randomItem = (l) => {
-    return this[Math.floor((Math.random()*l))];
+window.getID = (length = 16) => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
 }

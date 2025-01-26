@@ -8,7 +8,7 @@
     <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div x-data="game" class="flex flex-col w-full min-h-screen bg-gradient-to-b from-cyan-300 to-pink-400 text-white font-bubble relative select-none">
+    <div x-data="game" class="flex flex-col w-full min-h-screen bg-gradient-to-b from-cyan-300 to-pink-400 text-white font-bubble relative select-none overflow-hidden">
         <!-- BACKGROUND IMAGE BUBBLES FROM DREW BEAMER https://unsplash.com/photos/green-blue-and-pink-bubbles-Hk6E4UxjmGo -->
         <div class="absolute top-0 left-0 bg-cover bg-center w-full h-screen opacity-0 transition ease-in-out duration-[5000ms]" :class="{ 'opacity-5': true, 'opacity-0': false }" style="background-image: url('{{ url_for('static', filename='img/bubbles.jpg') }}');"></div>
         
@@ -28,6 +28,8 @@
         {% include 'modalCreateGame.html' %}
         {% include 'modalHowToPlay.html' %}
         {% include 'modalCredits.html' %}
+        {% include 'modalQuestion.html' %}
+        {% include 'modalScores.html' %}
     </div>
 
     

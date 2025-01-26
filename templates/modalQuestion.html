@@ -1,0 +1,41 @@
+<dialog x-ref="modalQuestion">
+    <template x-if="selectedQuestion">
+        <div class="flex text-white">
+            <div class="flex flex-col p-6 w-full h-full gap-2 md:gap-3">
+                <div class="flex flex-row justify-between w-full">
+                    <h4 class="bold text-xl md:text-4xl my-auto">Bubble Trivia!</h4>
+                </div>
+                <hr>
+                <div x-show="!selectedQuestion['is_answererd']" class="h-fit md:max-h-[55vh]">
+                    <template x-if="!selectedQuestion.is_answered">
+                        <div class="flex flex-col gap-4 relative h-full">
+                            <p 
+                                class="text-base md:text-xl my-3"
+                                x-html="selectedQuestion.question"
+                            ></p>
+                        </div>
+                    </template>
+                    <template x-if="selectedQuestion.is_answered">
+                        <div class="flex relative h-full m-auto">
+                            <template x-if="selectedQuestion.given_answer == selectedQuestion.correct_answer">
+                                <div class="m-auto text-6xl text-green-500 text-center text-shadow">
+                                    Yay!
+                                </div>
+                            </template>
+                            <template x-if="selectedQuestion.given_answer != selectedQuestion.correct_answer">
+                                <div class="m-auto text-6xl text-red-500 text-center text-shadow">
+                                    Boo!
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                <hr x-show="!selectedQuestion['is_answererd']">
+                <div class="w-full flex flex-row justify-between m-auto">
+                    <button x-bind:disabled="selectedQuestion['is_answered']" class="bg-none bg-green-600 min-w-32 ml-0" x-on:click="answerQuestion('True')">True</button>
+                    <button x-bind:disabled="selectedQuestion['is_answered']" class="bg-none bg-red-600 min-w-32 mr-0" x-on:click="answerQuestion('False')">False</button>
+                </div>
+            </div>
+        </div>
+    </template>
+</dialog>

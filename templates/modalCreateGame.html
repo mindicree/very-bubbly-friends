@@ -48,7 +48,7 @@
                     <div class="flex flex-col md:flex-row w-full justify-between">
                         <label for="new-game-round_duration" class="my-auto">Round Duration (s)</label>
                         <div class="w-full md:w-1/2 flex flex-row gap-4">
-                            <input id="new-game-round_duration" x-model="newGame.round_duration" type="range" min="60" max="300" step="10" class="my-auto w-full" x-bind:disabled="loading">
+                            <input id="new-game-round_duration" x-model="newGame.round_duration" type="range" min="30" max="300" step="10" class="my-auto w-full" x-bind:disabled="loading">
                             <output x-text="pad(newGame.round_duration)" class="my-auto"></output>
                         </div>
                     </div>

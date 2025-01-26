@@ -1,12 +1,12 @@
 <div class="scene" x-bind:class="isCurrentScene('gameList') ? 'scene-active' : 'scene-inactive'">
     <div class="flex flex-col w-full h-screen relative">
-        <div class="m-auto w-11/12 max-w-screen-xl min-h-[90vh] bg-cyan-400 border-2 border-cyan-500 drop-shadow-lg flex flex-col gap-8 relative">
-            <h3 class="text-xl md:text-4xl text-center my-3 mx-auto">Games</h3>
+        <div class="m-auto w-11/12 max-w-screen-xl min-h-[90vh] bg-cyan-400/80 border-2 border-cyan-500 drop-shadow-lg flex flex-col gap-8 relative">
+            <h3 class="text-xl md:text-4xl xl:text-6xl text-center my-3 mx-auto text-shadow">Games</h3>
             <div class="flex w-full overflow-y-scroll max-h-[80vh] mx-auto scroll relative">
                 <table class="w-full mx-auto">
                     <thead class="sticky top-0">
                         <tr class="bg-cyan-800">
-                            <th class="text-sm md:text-base min-w-32 text-left py-3  pl-3">Name</th>
+                            <th class="text-sm md:text-base min-w-32 text-left py-3  pl-3">Room</th>
                             <th class="text-sm md:text-base w-20 md:w-32 text-center py-3">Pl<span class="hidden md:inline">ayers</span></th>
                             <th class="text-sm md:text-base w-20 md:w-32 text-center py-3">R<span class="hidden md:inline">oun</span>ds</th>
                             <th class="text-sm md:text-base w-20 md:w-32 text-center py-3"><span class="hidden md:inline">Round </span>Dur<span class="hidden md:inline">ation</span></th>

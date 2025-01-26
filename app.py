@@ -89,7 +89,7 @@ def event_create_new_game(json):
         if len(json['name']) < 1:
             json['name'] = getID(3)
         json['password'] = json.get('password')
-        json['rounds'] = min(max(1, json['rounds']), 10)
+        json['rounds'] = min(max(1, int(json['rounds'])), 10)
 
         # CREATE APPROPRIATE GAME DATA
         json['id'] = getID()
@@ -129,7 +129,9 @@ def event_create_new_player(json):
                 json['name'] = getID()
         json['id'] = getID()
         json['score'] = 0
+        json['previous_score'] = 0
         json['sid'] = request.sid
+        json['color'] = f'#{str(hex(random.randrange(0, 2**24))[2:])}'
 
         players[json['id']] = json
 
@@ -183,21 +185,21 @@ def event_request_game_start(json):
 
     emit('game-started', getGameState(game_id), to=game_id)
 
-@socketio.on('request-gamestate')
-def event_request_new_round(json):
-    pass
+@socketio.on('player-tap')
+def event_request_player_tap(json):
+    emit('player-tapped', json, to=json['game_id'])
 
-@socketio.on('request-player-click')
-def event_request_new_round(json):
-    pass
+@socketio.on('player-pop-question')
+def event_request_player_pop_question(json):
+    emit('player-receive-question', json, to=json['game_id'])
 
-@socketio.on('request-player-answer')
-def event_request_new_round(json):
-    pass
+@socketio.on('player-answer-question')
+def event_request_player_answer_question(json):
+    emit('player-answered-question', json, to=json['game_id'])
 
-@socketio.on('request-round-end')
-def event_request_new_round(json):
-    pass
+@socketio.on('request-end-round')
+def event_request_end_round(json):
+    emit('end-round', to=json['game_id'])
 
 # HELPFUL GAME FUNCTIONS
 def isGamePasswordLocked(game_id):

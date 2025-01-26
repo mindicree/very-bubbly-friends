@@ -16,7 +16,7 @@ document.addEventListener('alpine:init', () => {
         newGame: {
             name: '',
             rounds: 3,
-            round_duration: 120,
+            round_duration: 60,
             max_players: 20,
             bubble_speed: 200,
             bubble_summon: 1000,
@@ -37,6 +37,20 @@ document.addEventListener('alpine:init', () => {
         bubbleMovementIterations: 0,
 
         prevRoundScores: [],
+        // TODO consider making scoring a game setting
+        scoring: {
+            easy: 1,
+            medium: 2,
+            hard: 3,
+        },
+        roundOverPhrases: [
+            'That was bubbly!',
+            'Great work, bubblers!'
+        ],
+
+        selectedQuestion: null,
+
+        clickLocked: false,
 
         audioEngine: {
             bgmMain: new Audio('/static/mp3/bgm.mp3'),
@@ -58,8 +72,6 @@ document.addEventListener('alpine:init', () => {
 
                 setInterval(() => {
                     if(Math.random() < 0.25 && !['gameDisplay', 'gameController'].includes(this.scene)) {
-                        console.log('making a bubble')
-
                         let newBubbleContainer = document.createElement('div')
                         let newBubble = document.createElement('div')
 
@@ -101,9 +113,10 @@ document.addEventListener('alpine:init', () => {
             })
 
             this.socket.on('disconnect', () => {
-                // TODO remove player
-                // TODO alert
-                // TODO return to home
+                alert('You have been disconnected');
+                this.player = {};
+                this.gameState = null;
+                this.setCurrentScene('home');
             })
 
             //////////////////////
@@ -168,6 +181,88 @@ document.addEventListener('alpine:init', () => {
                     this.setCurrentScene('gameController');
                 }  
             });
+            this.socket.on('player-tapped', json => {
+                if (!this.gameCreator) {
+                    return;
+                }
+
+                // TODO make pointer size a game setting
+                let pingSize = 64;
+                let pingX = (json['xRatio'] * window.innerWidth) - (pingSize/2);
+                let pingY = (json['yRatio'] * window.innerHeight) - (pingSize/2);
+                let ping = document.createElement('div')
+                ping.classList.add('absolute', 'rounded-full', 'border-2', 'ping');
+                ping.style.width = `${pingSize}px`;
+                ping.style.height = `${pingSize}px`;
+                ping.style.left = `${pingX}px`;
+                ping.style.top = `${pingY}px`;
+                ping.style.backgroundColor = json['player_color'];
+                ping.style.color = json['player_color'];
+                ping.style.borderColor = json['player_color'];
+
+                this.$refs.questionBubbleScreen.appendChild(ping);
+
+                Array.from(document.getElementsByClassName('question-bubble-container')).every(el => {
+                    let rect = el.getBoundingClientRect();
+                    if
+                    (
+                        pingX + pingSize > rect.x &&
+                        pingX - pingSize < rect.x + rect.width &&
+                        pingY + pingSize > rect.y &&
+                        pingY - pingSize < rect.y + rect.height &&
+                        !el.classList.contains('bubble-burst')
+                    ) {
+                        let question_id = el.getAttribute('data-question-id')
+                        // console.log('Collision detected for ' + el.getAttribute('data-question-id'));
+
+                        el.classList.add('bubble-burst');
+                        setTimeout(() => {
+                            el.remove()
+                        }, 300);
+
+                        this.socket.emit('player-pop-question', {
+                            game_id: this.gameState['id'],
+                            player_id: json["player_id"],
+                            question: this.gameState['questions'][question_id],
+                        });
+
+                        return false;
+                    }
+                    return true;
+                });
+
+                // REMOVE PING
+                ping.classList.add('bubble-burst');
+                setTimeout(() => {
+                    ping.remove();
+                }, 300);
+            })
+            this.socket.on('player-receive-question', json => {
+                if (this.gameCreator || this.player['id'] != json['player_id']) {
+                    return
+                }
+                json['question']['is_answered'] = false;
+                console.log(json);
+                this.selectedQuestion = json['question'];
+                this.$refs.modalQuestion.showModal();
+            })
+            this.socket.on('player-answered-question', json => {
+                if (!this.gameCreator) {
+                    return;
+                }
+                let player_id = json['player_id'];
+                console.log(this.players);
+                console.log(this.players[player_id])
+                if (json['question']['is_correct']) {
+                    this.players[this.players.findIndex(el => el['id'] == player_id)]['score'] += this.scoring[json['question']['difficulty']];
+                } else {
+                    this.players[this.players.findIndex(el => el['id'] == player_id)]['score']--;
+                }
+            })
+            this.socket.on('end-round', json => {
+                // TODO make sure anything else that needs to happen on round end happens
+                this.$refs.modalQuestion.close();
+            })
         },
         // SOCKET EMITTING GAME FUNCTIONS
         createNewPlayer() {
@@ -202,13 +297,72 @@ document.addEventListener('alpine:init', () => {
             // INCREMENT ROUND
             // TODO play round sound
             this.gameState['current_round']++;
-            this.roundText = this.gameState['current_round'] == this.gameState['rounds'] ? 'Final Round' : `Round ${pad(this.gameState['current_round'], 2)}`
+            this.players.forEach(el => el.previous_score = el.score);
+            let finalRound = this.gameState['current_round'] == this.gameState['rounds'];
+            this.roundText = finalRound ? 'Final Round' : `Round ${pad(this.gameState['current_round'], 2)}`
         
             // TODO get questions
+            let attempts = 0;
+            while(true) {
+                await sleep(1000)
+                fetchResult = await fetch('https://opentdb.com/api.php?amount=50&type=boolean');
+                if (!fetchResult.ok) {
+                    attempts++;
+                    console.log(`Failed ${attempts} in first loop.`)
+                    await sleep(1000);
+                    if (attempts == 3) {
+                        alert("Something went wrong with the trivia. I'm sorry.")
+                    }
+                    continue;
+                }
+                let results = await fetchResult.json();
 
+                if(!results.hasOwnProperty('results')) {
+                    console.log('No results');
+                    continue;
+                }
+
+                results['results'].forEach(el => {
+                    let newId = getID();
+                    el['locked'] = false;
+                    el['id'] = newId;
+                    this.gameState['questions'][newId] = el;
+                });
+
+                break;
+            }
+            attempts = 0;
+            while(true) {
+                await sleep(1000);
+                fetchResult = await fetch('https://opentdb.com/api.php?amount=50&type=boolean');
+                if (!fetchResult.ok) {
+                    attempts++;
+                    console.log(`Failed ${attempts} in second loop.`)
+                    await sleep(1000);
+                    if (attempts == 3) {
+                        alert("Something went wrong with the trivia. I'm sorry.")
+                    }
+                    continue;
+                }
+                let results = await fetchResult.json();
+
+                if(!results.hasOwnProperty('results')) {
+                    continue;
+                }
+
+                results['results'].forEach(el => {
+                    let newId = getID();
+                    el['locked'] = false;
+                    el['id'] = newId;
+                    this.gameState['questions'][newId] = el;
+                });
+
+                break;
+            }
+            
             // COUNTDOWN TIMER
             // TODO play sounds
-            await sleep(3000);
+            await sleep(1000);
             this.roundText = '3';
             await sleep(1000);
             this.roundText = '2';
@@ -219,8 +373,9 @@ document.addEventListener('alpine:init', () => {
             // START ROUND
             this.gameState['timer'] = this.gameState['round_duration'];
             this.gameState['round_start'] = true;
+            let questionValues = Object.values(this.gameState['questions']);
             this.bubbleCreationInterval = setInterval(() => {
-                this.createQuestionBubble({ difficulty: ['easy', 'medium', 'hard'][Math.floor(Math.random() * 3)] })
+                this.createQuestionBubble(questionValues[Math.floor(Math.random() * questionValues.length)])
                 // TODO make bubble creation rate 
             }, 1000);
             this.bubbleMovementInterval = setInterval(() => {
@@ -230,16 +385,16 @@ document.addEventListener('alpine:init', () => {
                     let velX = el.getAttribute('data-velocity-x');
                     let velY = el.getAttribute('data-velocity-y');
                     let initIteration = Number.parseInt(el.getAttribute('data-init-iteration'))
-                    el.style.transform = `translate(${Math.floor(velX * (this.bubbleMovementIterations - initIteration))}px, ${Math.floor(velY * (this.bubbleMovementIterations - initIteration))}px)`
+                    el.style.transform = `translate(${velX * (this.bubbleMovementIterations - initIteration)}px, ${velY * (this.bubbleMovementIterations - initIteration)}px)`
                 
                     // if out of bounds, remove
                     let rect = el.getBoundingClientRect();
                     if 
                     (
-                        rect.x < 0 - rect.width * 1.5 ||
-                        rect.y < 0 - rect.height * 1.5 ||
-                        rect.x > window.innerWidth + rect.width * 1.5 ||
-                        rect.y > window.innerHeight + rect.width * 1.5
+                        rect.x < 0 - rect.width * 1.25 ||
+                        rect.y < 0 - rect.height * 1.25 ||
+                        rect.x > window.innerWidth + rect.width * 1.25 ||
+                        rect.y > window.innerHeight + rect.width * 1.25
                     ) {
                         el.classList.add('slow-fade');
                         setTimeout(() => {
@@ -247,7 +402,7 @@ document.addEventListener('alpine:init', () => {
                         }, 2000);
                     }
                 })
-            }, 200)
+            }, 100)
             while(this.gameState['timer'] != 0) {
                 await sleep(1000);
                 this.gameState['timer']--;
@@ -259,26 +414,35 @@ document.addEventListener('alpine:init', () => {
 
             // STOP ROUND
             this.gameState['round_start'] = false;
-            Array.from(document.getElementsByClassName('question-bubble-container')).forEach(el => el.remove());
+            Array.from(document.getElementsByClassName('question-bubble-container')).forEach(async (el) => {
+                await sleep(200)
+                el.classList.add('bubble-burst');
+                setTimeout(() => {
+                    el.remove()
+                }, 300);
+            });
             this.bubbleMovementInterval = null;
             this.bubbleCreationInterval = null;
             this.bubbleMovementInterval = null;
             this.bubbleMovementIterations = 0;
-            
+            this.socket.emit('request-end-round', {
+                game_id: this.gameState['id'],
+            });
+            console.log(this.players);
+
+
             // TODO play sound
             // TODO make this text random from an array of options
-            this.roundText = 'Great job, bubble friends!';
+            this.roundText = finalRound ? 'Game Over!' : this.roundOverPhrases[Math.floor(Math.random() * this.roundOverPhrases.length)];
 
-            await sleep(1000);
-
-            // TODO make this text random from an array of options
-            this.roundText = "Let's see the scores!";
-
-            await sleep(1000);
-
+            await sleep(3000);
+            
             // IF FINAL ROUND, FINAL ROUND SCREEN
             // SHOW POINTS AND WINNER
             // EMIT TO ALL CONNECTED DEVICES TO DISCONNECT AND REMOVE GAME
+            if (finalRound) {
+                return;
+            }
 
             // ELSE SHOW POINTS (DISPLAY )
             // list player current scores
@@ -286,7 +450,32 @@ document.addEventListener('alpine:init', () => {
             // resort in fancy animation
             // modal who is in the lead, unless 
             // reexecute round
+
+            // SHOW SCORES
+            this.$refs.modalScores.showModal();
+
+            await sleep(60000);
+
+            this.$refs.modalScores.close();
+
+            await sleep(1000);
+
             this.executeRound();
+        },
+        answerQuestion(ans) {
+            this.selectedQuestion['given_answer'] = ans;
+            this.selectedQuestion['is_answered'] = true;
+            this.selectedQuestion['is_correct'] = this.selectedQuestion['given_answer'] == this.selectedQuestion['correct_answer'];
+            let cooldown = this.selectedQuestion['is_correct'] ? 500 : 3000;
+            this.socket.emit('player-answer-question', {
+                game_id: this.gameState['id'],
+                player_id: this.player['id'],
+                question: this.selectedQuestion,
+            });
+            let r = this.$refs;
+            setTimeout(() => {
+                r.modalQuestion.close();
+            }, cooldown);
         },
         // LOCAL STATE GAME FUNCTIONS
         // SCENE FUNCTIONS
@@ -304,8 +493,25 @@ document.addEventListener('alpine:init', () => {
         isCurrentSceneAny(names) {
             return names.includes(this.scene);
         },
+        sendClick(event) {
+            let xRatio = event.clientX / window.innerWidth;
+            let yRatio = event.clientY / window.innerHeight;
+
+            this.socket.emit('player-tap', {
+                game_id: this.gameState['id'],
+                player_id: this.player['id'],
+                player_color: this.player['color'],
+                xRatio: xRatio,
+                yRatio: yRatio,
+            })
+        },
         createQuestionBubble(question) {
-            if (!this.gameState['round_start']) {
+            // Check if game state exists and round has started
+            if (!this.gameState || !this.gameState['round_start']) {
+                return
+            }
+            // Check if there are too many bubbles
+            if (Array.from(document.getElementsByClassName('question-bubble-container')) > 40) {
                 return
             }
             let newBubbleContainer = document.createElement('div')
