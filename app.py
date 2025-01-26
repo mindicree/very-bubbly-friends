@@ -44,14 +44,14 @@ htpasswd = HtPasswdAuth(app)
 Payload.max_decode_packets = 512
 
 # file logging
-if (not os.path.isdir('logs')):
-    os.makedirs('logs')
-formatter = logging.Formatter('%(asctime)s : %(msecs)d %(name)s %(levelname)s %(lineno)d %(message)s')
-handler = logging.handlers.TimedRotatingFileHandler(os.path.join('logs', 'log'), when="midnight", backupCount=10)
-handler.setFormatter(formatter)
-handler.suffix = "%Y-%m-%d.log"
+# if (not os.path.isdir('logs')):
+#     os.makedirs('logs')
+# formatter = logging.Formatter('%(asctime)s : %(msecs)d %(name)s %(levelname)s %(lineno)d %(message)s')
+# handler = logging.handlers.TimedRotatingFileHandler(os.path.join('logs', 'log'), when="midnight", backupCount=10)
+# handler.setFormatter(formatter)
+# handler.suffix = "%Y-%m-%d.log"
 logger = logging.getLogger()
-logger.addHandler(handler)
+# logger.addHandler(handler)
 logger.setLevel(logging.DEBUG)
 
 # DATABASE CONFIGURATION
