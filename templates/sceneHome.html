@@ -77,7 +77,7 @@
             <div class="flex flex-col md:flex-row gap-4 m-auto w-full md:py-4">
                 <button @click="$refs.modalJoinGame.showModal(); $refs.inputNewPlayerName.focus()" class="md:text-4xl md:p-6 md:min-w-52">Join</button>
                 <span class="hidden md:inline my-auto text-4xl">OR</span>
-                <button @click="$refs.modalCreateGame.showModal()" class="md:text-4xl md:p-6 md:min-w-52">Create</button>
+                <button @click="$refs.modalCreateGame.showModal(); $refs.inputNewGameName.focus()" class="md:text-4xl md:p-6 md:min-w-52">Create</button>
             </div>
             <button @click="$refs.modalHowToPlay.showModal()">How To Play</button>
             <button @click="$refs.modalCredits.showModal()">Credits</button>

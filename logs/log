@@ -1,0 +1,203 @@
+2025-01-26 00:57:50,153 : 153 werkzeug INFO 97 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.151.56.204:5000
+2025-01-26 00:57:50,156 : 156 werkzeug INFO 97 [33mPress CTRL+C to quit[0m
+2025-01-26 00:57:50,156 : 156 werkzeug INFO 97  * Restarting with stat
+2025-01-26 00:57:51,330 : 330 werkzeug WARNING 97  * Debugger is active!
+2025-01-26 00:57:51,334 : 334 werkzeug INFO 97  * Debugger PIN: 134-412-349
+2025-01-26 00:57:51,397 : 397 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC0q1 HTTP/1.1" 200 -
+2025-01-26 00:57:51,397 : 397 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC0qn HTTP/1.1" 200 -
+2025-01-26 00:57:51,398 : 398 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC0sU HTTP/1.1" 200 -
+2025-01-26 00:57:51,399 : 399 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC0sz HTTP/1.1" 200 -
+2025-01-26 00:57:51,415 : 415 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1Yl&sid=JGQtLtqpkEQRzLaIAAAD HTTP/1.1" 200 -
+2025-01-26 00:57:51,416 : 416 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1Yo&sid=bziq-VANBbPNJ3-4AAAA HTTP/1.1" 200 -
+2025-01-26 00:57:51,417 : 417 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1Yl&sid=GGLJU8Iy4IREcAknAAAB HTTP/1.1" 200 -
+2025-01-26 00:57:51,417 : 417 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1Yl&sid=1xHiXWUyi0hnKccvAAAC HTTP/1.1" 200 -
+2025-01-26 00:57:51,428 : 428 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1Ym&sid=JGQtLtqpkEQRzLaIAAAD HTTP/1.1" 200 -
+2025-01-26 00:57:51,430 : 430 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1Ym&sid=GGLJU8Iy4IREcAknAAAB HTTP/1.1" 200 -
+2025-01-26 00:57:51,431 : 431 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1Yn&sid=1xHiXWUyi0hnKccvAAAC HTTP/1.1" 200 -
+2025-01-26 00:57:51,439 : 439 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1Yq&sid=bziq-VANBbPNJ3-4AAAA HTTP/1.1" 200 -
+2025-01-26 00:57:51,455 : 455 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1Z8.0&sid=JGQtLtqpkEQRzLaIAAAD HTTP/1.1" 200 -
+2025-01-26 00:57:51,455 : 455 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1Z8&sid=JGQtLtqpkEQRzLaIAAAD HTTP/1.1" 200 -
+2025-01-26 00:57:51,464 : 464 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1ZG&sid=1xHiXWUyi0hnKccvAAAC HTTP/1.1" 200 -
+2025-01-26 00:57:51,465 : 465 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1ZF&sid=1xHiXWUyi0hnKccvAAAC HTTP/1.1" 200 -
+2025-01-26 00:57:51,494 : 494 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1Zt&sid=1xHiXWUyi0hnKccvAAAC HTTP/1.1" 200 -
+2025-01-26 00:57:51,687 : 687 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1Zr&sid=1xHiXWUyi0hnKccvAAAC HTTP/1.1" 200 -
+2025-01-26 00:57:51,828 : 828 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET / HTTP/1.1" 200 -
+2025-01-26 00:57:51,841 : 841 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /socket.io/?EIO=4&transport=websocket&sid=bziq-VANBbPNJ3-4AAAA HTTP/1.1" 200 -
+2025-01-26 00:57:51,974 : 974 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 00:57:51,976 : 976 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:51] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 00:57:52,028 : 28 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:52] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1iO HTTP/1.1" 200 -
+2025-01-26 00:57:52,049 : 49 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:52] "GET /static/img/bubbles.jpg HTTP/1.1" 200 -
+2025-01-26 00:57:52,052 : 52 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:52] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 00:57:52,067 : 67 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:52] "POST /socket.io/?EIO=4&transport=polling&t=PIXC1iz&sid=dGKd25-3Yf410DhvAAAI HTTP/1.1" 200 -
+2025-01-26 00:57:52,073 : 73 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:52] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1i-&sid=dGKd25-3Yf410DhvAAAI HTTP/1.1" 200 -
+2025-01-26 00:57:52,073 : 73 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:52] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 00:57:52,097 : 97 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 00:57:52] "GET /socket.io/?EIO=4&transport=polling&t=PIXC1jR&sid=dGKd25-3Yf410DhvAAAI HTTP/1.1" 200 -
+2025-01-26 01:00:39,068 : 68 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET / HTTP/1.1" 200 -
+2025-01-26 01:00:39,079 : 79 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /socket.io/?EIO=4&transport=websocket&sid=dGKd25-3Yf410DhvAAAI HTTP/1.1" 200 -
+2025-01-26 01:00:39,162 : 162 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:00:39,207 : 207 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /static/img/bubbles.jpg HTTP/1.1" 200 -
+2025-01-26 01:00:39,208 : 208 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:00:39,227 : 227 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:00:39,236 : 236 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /socket.io/?EIO=4&transport=polling&t=PIXCgX0 HTTP/1.1" 200 -
+2025-01-26 01:00:39,256 : 256 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:00:39,281 : 281 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "POST /socket.io/?EIO=4&transport=polling&t=PIXCgXi&sid=uuwpWwpsmRgmaEWeAAAK HTTP/1.1" 200 -
+2025-01-26 01:00:39,285 : 285 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /socket.io/?EIO=4&transport=polling&t=PIXCgXk&sid=uuwpWwpsmRgmaEWeAAAK HTTP/1.1" 200 -
+2025-01-26 01:00:39,308 : 308 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:00:39] "GET /socket.io/?EIO=4&transport=polling&t=PIXCgY4&sid=uuwpWwpsmRgmaEWeAAAK HTTP/1.1" 200 -
+2025-01-26 01:01:22,391 : 391 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET / HTTP/1.1" 200 -
+2025-01-26 01:01:22,402 : 402 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET /socket.io/?EIO=4&transport=websocket&sid=uuwpWwpsmRgmaEWeAAAK HTTP/1.1" 200 -
+2025-01-26 01:01:22,472 : 472 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:01:22,515 : 515 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:01:22,528 : 528 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET /static/img/bubbles.jpg HTTP/1.1" 200 -
+2025-01-26 01:01:22,543 : 543 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:01:22,549 : 549 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET /socket.io/?EIO=4&transport=polling&t=PIXCr5o HTTP/1.1" 200 -
+2025-01-26 01:01:22,584 : 584 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "POST /socket.io/?EIO=4&transport=polling&t=PIXCr6I&sid=5acfwUIgJo10XIklAAAM HTTP/1.1" 200 -
+2025-01-26 01:01:22,585 : 585 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:01:22,589 : 589 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:22] "GET /socket.io/?EIO=4&transport=polling&t=PIXCr6K&sid=5acfwUIgJo10XIklAAAM HTTP/1.1" 200 -
+2025-01-26 01:01:23,426 : 426 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET / HTTP/1.1" 200 -
+2025-01-26 01:01:23,435 : 435 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /socket.io/?EIO=4&transport=websocket&sid=GGLJU8Iy4IREcAknAAAB HTTP/1.1" 200 -
+2025-01-26 01:01:23,484 : 484 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:01:23,489 : 489 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:01:23,528 : 528 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /socket.io/?EIO=4&transport=polling&t=PIXCrL5 HTTP/1.1" 200 -
+2025-01-26 01:01:23,546 : 546 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:01:23,558 : 558 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:01:23,560 : 560 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:01:23,561 : 561 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "POST /socket.io/?EIO=4&transport=polling&t=PIXCrLX&sid=tWiuh0pIC1Of3mT4AAAO HTTP/1.1" 200 -
+2025-01-26 01:01:23,565 : 565 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /socket.io/?EIO=4&transport=polling&t=PIXCrLZ&sid=tWiuh0pIC1Of3mT4AAAO HTTP/1.1" 200 -
+2025-01-26 01:01:23,574 : 574 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /socket.io/?EIO=4&transport=polling&t=PIXCrLm&sid=tWiuh0pIC1Of3mT4AAAO HTTP/1.1" 200 -
+2025-01-26 01:01:23,850 : 850 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET / HTTP/1.1" 200 -
+2025-01-26 01:01:23,857 : 857 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /socket.io/?EIO=4&transport=websocket&sid=JGQtLtqpkEQRzLaIAAAD HTTP/1.1" 200 -
+2025-01-26 01:01:23,908 : 908 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[36mGET /static/dist/app.css HTTP/1.1[0m" 304 -
+2025-01-26 01:01:23,914 : 914 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[36mGET /static/dist/app.js HTTP/1.1[0m" 304 -
+2025-01-26 01:01:23,938 : 938 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /socket.io/?EIO=4&transport=polling&t=PIXCrRT HTTP/1.1" 200 -
+2025-01-26 01:01:23,952 : 952 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:01:23,961 : 961 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[36mGET /static/dist/shine_bubble.ttf HTTP/1.1[0m" 304 -
+2025-01-26 01:01:23,966 : 966 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "POST /socket.io/?EIO=4&transport=polling&t=PIXCrRu&sid=Gy-FmlWP2XoA6T2uAAAQ HTTP/1.1" 200 -
+2025-01-26 01:01:23,969 : 969 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:01:23,971 : 971 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "GET /socket.io/?EIO=4&transport=polling&t=PIXCrRv&sid=Gy-FmlWP2XoA6T2uAAAQ HTTP/1.1" 200 -
+2025-01-26 01:01:23,976 : 976 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:23] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:01:24,010 : 10 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:01:24] "GET /socket.io/?EIO=4&transport=polling&t=PIXCrSb&sid=Gy-FmlWP2XoA6T2uAAAQ HTTP/1.1" 200 -
+2025-01-26 01:07:56,555 : 555 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET / HTTP/1.1" 200 -
+2025-01-26 01:07:56,573 : 573 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET /socket.io/?EIO=4&transport=websocket&sid=5acfwUIgJo10XIklAAAM HTTP/1.1" 200 -
+2025-01-26 01:07:56,681 : 681 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:07:56,736 : 736 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:07:56,787 : 787 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET /socket.io/?EIO=4&transport=polling&t=PIXELLl HTTP/1.1" 200 -
+2025-01-26 01:07:56,799 : 799 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET /static/img/bubbles.jpg HTTP/1.1" 200 -
+2025-01-26 01:07:56,817 : 817 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "POST /socket.io/?EIO=4&transport=polling&t=PIXELM8&sid=IkS6OEkerr-yRZBZAAAS HTTP/1.1" 200 -
+2025-01-26 01:07:56,824 : 824 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:07:56,828 : 828 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "GET /socket.io/?EIO=4&transport=polling&t=PIXELMA&sid=IkS6OEkerr-yRZBZAAAS HTTP/1.1" 200 -
+2025-01-26 01:07:56,831 : 831 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:56] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:07:57,599 : 599 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET / HTTP/1.1" 200 -
+2025-01-26 01:07:57,610 : 610 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET /socket.io/?EIO=4&transport=websocket&sid=tWiuh0pIC1Of3mT4AAAO HTTP/1.1" 200 -
+2025-01-26 01:07:57,656 : 656 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:07:57,659 : 659 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:07:57,678 : 678 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET /socket.io/?EIO=4&transport=polling&t=PIXELZh HTTP/1.1" 200 -
+2025-01-26 01:07:57,687 : 687 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:07:57,700 : 700 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:07:57,722 : 722 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "POST /socket.io/?EIO=4&transport=polling&t=PIXELaK&sid=wfYa0ORAd8uMbL6mAAAU HTTP/1.1" 200 -
+2025-01-26 01:07:57,725 : 725 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:07:57,728 : 728 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET /socket.io/?EIO=4&transport=polling&t=PIXELaL&sid=wfYa0ORAd8uMbL6mAAAU HTTP/1.1" 200 -
+2025-01-26 01:07:57,775 : 775 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:57] "GET /socket.io/?EIO=4&transport=polling&t=PIXELb4&sid=wfYa0ORAd8uMbL6mAAAU HTTP/1.1" 200 -
+2025-01-26 01:07:58,068 : 68 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "GET / HTTP/1.1" 200 -
+2025-01-26 01:07:58,080 : 80 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "GET /socket.io/?EIO=4&transport=websocket&sid=Gy-FmlWP2XoA6T2uAAAQ HTTP/1.1" 200 -
+2025-01-26 01:07:58,173 : 173 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "[36mGET /static/dist/app.css HTTP/1.1[0m" 304 -
+2025-01-26 01:07:58,181 : 181 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "[36mGET /static/dist/app.js HTTP/1.1[0m" 304 -
+2025-01-26 01:07:58,215 : 215 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "GET /socket.io/?EIO=4&transport=polling&t=PIXELi3 HTTP/1.1" 200 -
+2025-01-26 01:07:58,235 : 235 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:07:58,251 : 251 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "[36mGET /static/dist/shine_bubble.ttf HTTP/1.1[0m" 304 -
+2025-01-26 01:07:58,258 : 258 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "POST /socket.io/?EIO=4&transport=polling&t=PIXELid&sid=ieDJkQEQb60QlDNbAAAW HTTP/1.1" 200 -
+2025-01-26 01:07:58,260 : 260 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "GET /socket.io/?EIO=4&transport=polling&t=PIXELie&sid=ieDJkQEQb60QlDNbAAAW HTTP/1.1" 200 -
+2025-01-26 01:07:58,269 : 269 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:07:58,274 : 274 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "GET /socket.io/?EIO=4&transport=polling&t=PIXELiv&sid=ieDJkQEQb60QlDNbAAAW HTTP/1.1" 200 -
+2025-01-26 01:07:58,278 : 278 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:07:58,316 : 316 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:07:58] "GET /socket.io/?EIO=4&transport=polling&t=PIXELje&sid=ieDJkQEQb60QlDNbAAAW HTTP/1.1" 200 -
+2025-01-26 01:08:04,284 : 284 urllib3.connectionpool DEBUG 1049 Starting new HTTPS connection (1): randomuser.me:443
+2025-01-26 01:08:04,507 : 507 urllib3.connectionpool DEBUG 544 https://randomuser.me:443 "GET /api/ HTTP/1.1" 200 None
+2025-01-26 01:08:05,055 : 55 urllib3.connectionpool DEBUG 1049 Starting new HTTPS connection (1): randomuser.me:443
+2025-01-26 01:08:05,253 : 253 urllib3.connectionpool DEBUG 544 https://randomuser.me:443 "GET /api/ HTTP/1.1" 200 None
+2025-01-26 01:13:51,073 : 73 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET / HTTP/1.1" 200 -
+2025-01-26 01:13:51,245 : 245 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET /socket.io/?EIO=4&transport=websocket&sid=IkS6OEkerr-yRZBZAAAS HTTP/1.1" 200 -
+2025-01-26 01:13:51,394 : 394 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:13:51,440 : 440 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:13:51,477 : 477 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXFhxo HTTP/1.1" 200 -
+2025-01-26 01:13:51,497 : 497 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET /static/img/bubbles.jpg HTTP/1.1" 200 -
+2025-01-26 01:13:51,511 : 511 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:13:51,513 : 513 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "POST /socket.io/?EIO=4&transport=polling&t=PIXFhyJ&sid=vaIej32yE9hV9BWoAAAY HTTP/1.1" 200 -
+2025-01-26 01:13:51,517 : 517 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:13:51,518 : 518 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:51] "GET /socket.io/?EIO=4&transport=polling&t=PIXFhyL&sid=vaIej32yE9hV9BWoAAAY HTTP/1.1" 200 -
+2025-01-26 01:13:59,466 : 466 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET / HTTP/1.1" 200 -
+2025-01-26 01:13:59,476 : 476 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET /socket.io/?EIO=4&transport=websocket&sid=wfYa0ORAd8uMbL6mAAAU HTTP/1.1" 200 -
+2025-01-26 01:13:59,516 : 516 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:13:59,517 : 517 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:13:59,548 : 548 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET /socket.io/?EIO=4&transport=polling&t=PIXFjvv HTTP/1.1" 200 -
+2025-01-26 01:13:59,560 : 560 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:13:59,573 : 573 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:13:59,573 : 573 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:13:59,576 : 576 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "POST /socket.io/?EIO=4&transport=polling&t=PIXFjwI&sid=1m9PAQWRzPExxAeHAAAa HTTP/1.1" 200 -
+2025-01-26 01:13:59,577 : 577 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET /socket.io/?EIO=4&transport=polling&t=PIXFjwK&sid=1m9PAQWRzPExxAeHAAAa HTTP/1.1" 200 -
+2025-01-26 01:13:59,590 : 590 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:13:59] "GET /socket.io/?EIO=4&transport=polling&t=PIXFjwW&sid=1m9PAQWRzPExxAeHAAAa HTTP/1.1" 200 -
+2025-01-26 01:14:00,141 : 141 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "GET / HTTP/1.1" 200 -
+2025-01-26 01:14:00,146 : 146 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "GET /socket.io/?EIO=4&transport=websocket&sid=ieDJkQEQb60QlDNbAAAW HTTP/1.1" 200 -
+2025-01-26 01:14:00,194 : 194 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "[36mGET /static/dist/app.css HTTP/1.1[0m" 304 -
+2025-01-26 01:14:00,200 : 200 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "[36mGET /static/dist/app.js HTTP/1.1[0m" 304 -
+2025-01-26 01:14:00,217 : 217 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "GET /socket.io/?EIO=4&transport=polling&t=PIXFk4N HTTP/1.1" 200 -
+2025-01-26 01:14:00,231 : 231 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:14:00,241 : 241 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "[36mGET /static/dist/shine_bubble.ttf HTTP/1.1[0m" 304 -
+2025-01-26 01:14:00,245 : 245 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "POST /socket.io/?EIO=4&transport=polling&t=PIXFk4k&sid=_v3-xzPsnUCwL_6dAAAc HTTP/1.1" 200 -
+2025-01-26 01:14:00,247 : 247 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "GET /socket.io/?EIO=4&transport=polling&t=PIXFk4l&sid=_v3-xzPsnUCwL_6dAAAc HTTP/1.1" 200 -
+2025-01-26 01:14:00,248 : 248 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:14:00,257 : 257 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "GET /socket.io/?EIO=4&transport=polling&t=PIXFk4x&sid=_v3-xzPsnUCwL_6dAAAc HTTP/1.1" 200 -
+2025-01-26 01:14:00,258 : 258 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:00] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:14:02,368 : 368 urllib3.connectionpool DEBUG 1049 Starting new HTTPS connection (1): randomuser.me:443
+2025-01-26 01:14:02,692 : 692 urllib3.connectionpool DEBUG 544 https://randomuser.me:443 "GET /api/ HTTP/1.1" 200 None
+2025-01-26 01:14:03,247 : 247 urllib3.connectionpool DEBUG 1049 Starting new HTTPS connection (1): randomuser.me:443
+2025-01-26 01:14:03,376 : 376 urllib3.connectionpool DEBUG 544 https://randomuser.me:443 "GET /api/ HTTP/1.1" 200 None
+2025-01-26 01:14:31,423 : 423 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET / HTTP/1.1" 200 -
+2025-01-26 01:14:31,438 : 438 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /socket.io/?EIO=4&transport=websocket&sid=vaIej32yE9hV9BWoAAAY HTTP/1.1" 200 -
+2025-01-26 01:14:31,503 : 503 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:14:31,512 : 512 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:14:31,569 : 569 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /socket.io/?EIO=4&transport=polling&t=PIXFrkD HTTP/1.1" 200 -
+2025-01-26 01:14:31,598 : 598 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /static/img/bubbles.jpg HTTP/1.1" 200 -
+2025-01-26 01:14:31,601 : 601 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:14:31,622 : 622 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "POST /socket.io/?EIO=4&transport=polling&t=PIXFrkx&sid=P7uefvEBUBCki1ERAAAe HTTP/1.1" 200 -
+2025-01-26 01:14:31,627 : 627 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /socket.io/?EIO=4&transport=polling&t=PIXFrk-&sid=P7uefvEBUBCki1ERAAAe HTTP/1.1" 200 -
+2025-01-26 01:14:31,628 : 628 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:14:31,659 : 659 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:31] "GET /socket.io/?EIO=4&transport=polling&t=PIXFrlU&sid=P7uefvEBUBCki1ERAAAe HTTP/1.1" 200 -
+2025-01-26 01:14:32,644 : 644 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "GET / HTTP/1.1" 200 -
+2025-01-26 01:14:32,650 : 650 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "GET /socket.io/?EIO=4&transport=websocket&sid=1m9PAQWRzPExxAeHAAAa HTTP/1.1" 200 -
+2025-01-26 01:14:32,705 : 705 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "[36mGET /static/dist/app.css HTTP/1.1[0m" 304 -
+2025-01-26 01:14:32,709 : 709 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "[36mGET /static/dist/app.js HTTP/1.1[0m" 304 -
+2025-01-26 01:14:32,731 : 731 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "GET /socket.io/?EIO=4&transport=polling&t=PIXFs0J HTTP/1.1" 200 -
+2025-01-26 01:14:32,743 : 743 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:14:32,759 : 759 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "[36mGET /static/dist/shine_bubble.ttf HTTP/1.1[0m" 304 -
+2025-01-26 01:14:32,765 : 765 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "POST /socket.io/?EIO=4&transport=polling&t=PIXFs0r&sid=Xz_dv0lW8-pGoeP_AAAg HTTP/1.1" 200 -
+2025-01-26 01:14:32,769 : 769 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "GET /socket.io/?EIO=4&transport=polling&t=PIXFs0t&sid=Xz_dv0lW8-pGoeP_AAAg HTTP/1.1" 200 -
+2025-01-26 01:14:32,818 : 818 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:32] "GET /socket.io/?EIO=4&transport=polling&t=PIXFs1k&sid=Xz_dv0lW8-pGoeP_AAAg HTTP/1.1" 200 -
+2025-01-26 01:14:33,168 : 168 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "GET / HTTP/1.1" 200 -
+2025-01-26 01:14:33,174 : 174 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "GET /socket.io/?EIO=4&transport=websocket&sid=_v3-xzPsnUCwL_6dAAAc HTTP/1.1" 200 -
+2025-01-26 01:14:33,217 : 217 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "[36mGET /static/dist/app.css HTTP/1.1[0m" 304 -
+2025-01-26 01:14:33,225 : 225 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "[36mGET /static/dist/app.js HTTP/1.1[0m" 304 -
+2025-01-26 01:14:33,244 : 244 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "GET /socket.io/?EIO=4&transport=polling&t=PIXFs8O HTTP/1.1" 200 -
+2025-01-26 01:14:33,252 : 252 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:14:33,264 : 264 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "[36mGET /static/dist/shine_bubble.ttf HTTP/1.1[0m" 304 -
+2025-01-26 01:14:33,265 : 265 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:14:33,266 : 266 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "POST /socket.io/?EIO=4&transport=polling&t=PIXFs8k&sid=1fS7jOn_dt1qyXtBAAAi HTTP/1.1" 200 -
+2025-01-26 01:14:33,270 : 270 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "GET /socket.io/?EIO=4&transport=polling&t=PIXFs8l&sid=1fS7jOn_dt1qyXtBAAAi HTTP/1.1" 200 -
+2025-01-26 01:14:33,307 : 307 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:14:33] "GET /socket.io/?EIO=4&transport=polling&t=PIXFs9N&sid=1fS7jOn_dt1qyXtBAAAi HTTP/1.1" 200 -
+2025-01-26 01:15:40,095 : 95 urllib3.connectionpool DEBUG 1049 Starting new HTTPS connection (1): randomuser.me:443
+2025-01-26 01:15:40,277 : 277 urllib3.connectionpool DEBUG 544 https://randomuser.me:443 "GET /api/ HTTP/1.1" 200 None
+2025-01-26 01:15:41,564 : 564 urllib3.connectionpool DEBUG 1049 Starting new HTTPS connection (1): randomuser.me:443
+2025-01-26 01:15:41,713 : 713 urllib3.connectionpool DEBUG 544 https://randomuser.me:443 "GET /api/ HTTP/1.1" 200 None
+2025-01-26 01:38:52,227 : 227 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "GET / HTTP/1.1" 200 -
+2025-01-26 01:38:52,256 : 256 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "GET /socket.io/?EIO=4&transport=websocket&sid=P7uefvEBUBCki1ERAAAe HTTP/1.1" 200 -
+2025-01-26 01:38:52,326 : 326 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "GET /static/dist/app.css HTTP/1.1" 200 -
+2025-01-26 01:38:52,341 : 341 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "[36mGET /static/img/bubbles.jpg HTTP/1.1[0m" 304 -
+2025-01-26 01:38:52,363 : 363 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "GET /static/dist/shine_bubble.ttf HTTP/1.1" 200 -
+2025-01-26 01:38:52,363 : 363 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "GET /static/dist/app.js HTTP/1.1" 200 -
+2025-01-26 01:38:52,387 : 387 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "GET /socket.io/?EIO=4&transport=polling&t=PIXLQNV HTTP/1.1" 200 -
+2025-01-26 01:38:52,413 : 413 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "POST /socket.io/?EIO=4&transport=polling&t=PIXLQNw&sid=Zc0o00-dB1urVr1_AAAk HTTP/1.1" 200 -
+2025-01-26 01:38:52,414 : 414 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -
+2025-01-26 01:38:52,417 : 417 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "GET /socket.io/?EIO=4&transport=polling&t=PIXLQNx&sid=Zc0o00-dB1urVr1_AAAk HTTP/1.1" 200 -
+2025-01-26 01:38:52,421 : 421 werkzeug INFO 97 10.151.56.204 - - [26/Jan/2025 01:38:52] "[35m[1mGET /static/mp3/bgm.mp3 HTTP/1.1[0m" 206 -

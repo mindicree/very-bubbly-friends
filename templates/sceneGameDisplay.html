@@ -1,0 +1,20 @@
+<div class="scene" x-bind:class="isCurrentScene('gameDisplay') ? 'scene-active' : 'scene-inactive'">
+    <template x-if="gameState">
+        <div x-ref="questionBubbleScreen" class="flex flex-col w-full h-screen relative overflow-hidden m-auto">
+            <template x-if="gameState['round_start']">
+                <span 
+                    class="absolute top-3 right-3 text-6xl text-shadow z-50" 
+                    x-text="gameState['timer']"
+                    :style="{
+                        color: `rgb(255, ${Math.min(255, 255 * (gameState['timer'] / gameState['round_duration']))},  ${255 * (gameState['timer'] / gameState['round_duration'])})`
+                    }"
+                ></span>
+            </template>
+            <template x-if="gameState['timer'] == 0">
+                <div class="m-auto">
+                    <h1 x-text="roundText" class="text-4xl lg:text-6xl xxl:text-8xl"></h1>
+                </div>
+            </template>
+        </div>
+    </template>
+</div>

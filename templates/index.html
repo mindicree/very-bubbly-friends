@@ -13,15 +13,15 @@
         <div class="absolute top-0 left-0 bg-cover bg-center w-full h-screen opacity-0 transition ease-in-out duration-[5000ms]" :class="{ 'opacity-5': true, 'opacity-0': false }" style="background-image: url('{{ url_for('static', filename='img/bubbles.jpg') }}');"></div>
         
         <!-- FLOATING BUBBLES CONTAINER -->
-        <div x-ref="bubbleBackgroundContainer" class="absolute top-0 left-0 w-full h-screen relative transition ease-in-out duration-500 overflow-hidden">
-
-        </div>
+        <div x-ref="bubbleBackgroundContainer" class="absolute top-0 left-0 w-full h-screen relative transition ease-in-out duration-[3000ms] overflow-hidden" x-bind:class="['gameDisplay', 'gameController'].includes(scene) ? 'opacity-0' : 'opacity-100'"></div>
 
         <!-- SCENES -->
         {% include 'sceneLoading.html' %}
         {% include 'sceneHome.html' %}
         {% include 'sceneLobby.html' %}
         {% include 'sceneGameList.html' %}
+        {% include 'sceneGameDisplay.html' %}
+        {% include 'sceneGameController.html' %}
 
         <!-- MODALS -->
         {% include 'modalJoinGame.html' %}

@@ -10,3 +10,7 @@ window.pad = (number, padding = 3) => {
 window.toCapitalCase = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+Array.prototype.randomItem = (l) => {
+    return this[Math.floor((Math.random()*l))];
+}

@@ -13,16 +13,29 @@
                     <div class="flex flex-col md:flex-row w-full justify-between">
                         <label for="new-game-name" class="my-auto">Room Name</label>
                         <div class="w-full md:w-1/2 flex flex-row gap-4">
-                            <!-- TODO focus this on open dialog -->
-                            <!-- TODO enter moves to next dialog -->
-                            <input id="new-game-name" x-model="newGame.name" maxlength="32" class="w-full" x-bind:disabled="loading">
+                            <input 
+                                x-ref="inputNewGameName" 
+                                id="new-game-name" 
+                                x-model="newGame.name" 
+                                maxlength="32" 
+                                class="w-full" 
+                                x-bind:disabled="loading"
+                                x-on:keyup.enter="$refs.inputNewGamePassword.focus()"
+                            >
                         </div>
                     </div>
                     <div class="flex flex-col md:flex-row w-full justify-between">
                         <label for="new-game-password" class="my-auto">Room Password</label>
                         <div class="w-full md:w-1/2 flex flex-row gap-4">
-                            <!-- TODO enter submits the form -->
-                            <input id="new-game-password" x-model="newGame.password" type="password" class="w-full" x-bind:disabled="loading">
+                            <input 
+                                x-ref="inputNewGamePassword" 
+                                id="new-game-password" 
+                                x-model="newGame.password" 
+                                type="password" 
+                                class="w-full" 
+                                x-bind:disabled="loading"
+                                x-on:keyup.enter="createNewGame()"
+                            >
                         </div>
                     </div>
                     <div class="flex flex-col md:flex-row w-full justify-between">

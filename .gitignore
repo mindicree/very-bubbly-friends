@@ -7,3 +7,4 @@ node_modules/
 static/dist/
 static/manifest.json
 config.yaml
+*.log

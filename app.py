@@ -1,6 +1,8 @@
+import logging.handlers
 from flask import Flask, request , render_template
 from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_htpasswd import HtPasswdAuth
+from engineio.payload import Payload
 import random
 from datetime import datetime, timedelta
 from time import sleep
@@ -10,12 +12,14 @@ import os
 import copy
 import jsonpickle
 import secrets
-from pprint import pprint
 import traceback
+from pprint import pprint
 import requests
 
+import logging
+
 from utilities import *
-from models import *
+# from models import *
 
 # CONFIGURATION LOAD
 try:
@@ -37,11 +41,23 @@ app.config['SECRET_KEY'] = config['FLASK_SECRET']
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 socketio = SocketIO(app)
 htpasswd = HtPasswdAuth(app)
+Payload.max_decode_packets = 512
+
+# file logging
+if (not os.path.isdir('logs')):
+    os.makedirs('logs')
+formatter = logging.Formatter('%(asctime)s : %(msecs)d %(name)s %(levelname)s %(lineno)d %(message)s')
+handler = logging.handlers.TimedRotatingFileHandler(os.path.join('logs', 'log'), when="midnight", backupCount=10)
+handler.setFormatter(formatter)
+handler.suffix = "%Y-%m-%d.log"
+logger = logging.getLogger()
+logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
 
 # DATABASE CONFIGURATION
-Base.metadata.create_all(engine)
-def createsession():
-    return Session(engine)
+# Base.metadata.create_all(engine)
+# def createsession():
+#     return Session(engine)
 
 # GAME DATA
 games = {}
@@ -67,7 +83,6 @@ def event_disconnect():
 
 @socketio.on('create-new-game')
 def event_create_new_game(json):
-    pprint(json)
     try:
         # VALIDATE CURRENT DATA
         json['name'] = json['name'] if len(str(json['name'])) <= 32 else str(json['name'])[0:32]
@@ -82,9 +97,11 @@ def event_create_new_game(json):
         json['started'] = False
         json['current_round'] = 0
         json['creator_sid'] = request.sid
+        json['round_start'] = False
+        json['questions'] = {}
+        json['timer'] = 0
 
         # ADD TO GAME LIST
-        pprint(json)
         games[json['id']] = json
 
         # ADD CREATOR TO NEW ROOM
@@ -93,12 +110,11 @@ def event_create_new_game(json):
         # CONFIRM GAME STATUS AND SEND TO LOBBY
         emit('game-creation-successful', json, to=request.sid)
     except Exception as e:
-        pprint(traceback.format_exc(e))
+        logger.exception(e)
         emit('game-creation-failed', {'message': e}, to=request.sid)
 
 @socketio.on('create-new-player')
 def event_create_new_player(json):
-    pprint(json)
     try:
         if len(str(json['name'])) <= 0:
             res = requests.get('https://randomuser.me/api/')
@@ -107,7 +123,7 @@ def event_create_new_player(json):
                     result = res.json()['results'][0]['name']
                     json['name'] = result['first'] + ' ' + result['last']
                 except Exception as e:
-                    pprint(traceback.format_exc(e))
+                    logger.exception(e)
                     json['name'] = getID()
             else:
                 json['name'] = getID()
@@ -119,7 +135,7 @@ def event_create_new_player(json):
 
         emit('player-creation-successful', json, to=request.sid)
     except Exception as e:
-        pprint(traceback.format_exc(e))
+        logger.exception(e)
         emit('player-creation-failed', {'message': e}, to=request.sid)
 
 @socketio.on('request-game-list')
@@ -133,9 +149,6 @@ def event_request_game_join(json):
 
     # TODO check if password locked and if so, check password
 
-    if not isGameStarted(game_id):
-        addPlayerToGame(game_id, player_id)
-    
     if not isGameStarted(game_id):
         addPlayerToGame(game_id, player_id)
     
@@ -154,13 +167,6 @@ def event_request_game_lobby(json):
         emit('game-not-found', {
             'game_id': game_id
         }, to=game_id)
-    try:
-        emit('update-game-lobby', getGameState(game_id), to=game_id)
-    except Exception as e:
-        # TODO implement functionality to remove game info
-        emit('game-not-found', {
-            'game_id': game_id
-        }, to=game_id)
 
 @socketio.on('request-game-start')
 def event_request_game_start(json):
@@ -173,54 +179,9 @@ def event_request_game_start(json):
     
     games[game_id]['started'] = True
 
-    emit('update-game-list', getSanitizedGames(), to=request.sid)
+    emit('update-game-list', getSanitizedGames(), broadcast=True)
 
     emit('game-started', getGameState(game_id), to=game_id)
-@socketio.on('request-game-start')
-def event_request_game_start(json):
-    game_id = json['game_id']
-
-    sleep(random.random() * 1)
-
-    if isGameStarted(game_id) or not isPlayerCountSufficient(game_id):
-        return
-    
-    games[game_id]['started'] = True
-
-    emit('update-game-list', getSanitizedGames(), to=request.sid)
-
-    emit('game-started', getGameState(game_id), to=game_id)
-
-@socketio.on('request-new-round')
-def event_request_new_round(json):
-    pass
-
-@socketio.on('request-countdown-timer')
-def event_request_new_round(json):
-    pass
-
-@socketio.on('request-gamestate')
-def event_request_new_round(json):
-    pass
-
-@socketio.on('request-player-click')
-def event_request_new_round(json):
-    pass
-
-@socketio.on('request-player-answer')
-def event_request_new_round(json):
-    pass
-
-@socketio.on('request-round-end')
-def event_request_new_round(json):
-    pass
-@socketio.on('request-new-round')
-def event_request_new_round(json):
-    pass
-
-@socketio.on('request-countdown-timer')
-def event_request_new_round(json):
-    pass
 
 @socketio.on('request-gamestate')
 def event_request_new_round(json):
@@ -243,23 +204,14 @@ def isGamePasswordLocked(game_id):
     try:
         return games[game_id]['password'] != None
     except Exception as e:
-        pprint(traceback.format_exc(e))
+        logger.exception(e)
         return None
-
-def isGameStarted(game_id):
-    return games[game_id]['started']
 
 def isGameStarted(game_id):
     return games[game_id]['started']
     
 def addPlayerToGame(game_id, player_id):
     games[game_id]['players'].append(player_id)
-
-def getGameState(game_id):
-    return {
-        'game_state': games[game_id],
-        'players': [player for player in players.values() if player['id'] in games[game_id]['players']]
-    }
 
 def getGameState(game_id):
     return {
@@ -284,22 +236,6 @@ def getSanitizedGames():
         game['creator_sid'] = None
 
     return sanitized_games
-def removePlayer(player_id=None, player_sid=None):
-    pass
-
-def isPlayerCountSufficient(game_id):
-    return len(games[game_id]['players']) > 1
-
-def getSanitizedGames():
-    sanitized_games = [game for game in games.values() if game['started'] == False]
-    for game in sanitized_games:
-        pw = game.get('password')
-        game['password'] = pw != None and pw != False
-        game['creator_sid'] = None
-
-    return sanitized_games
-
-
 
 # RUN
 if __name__ == "__main__":
