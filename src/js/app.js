@@ -53,7 +53,7 @@ document.addEventListener('alpine:init', () => {
         clickLocked: false,
 
         audioEngine: {
-            bgmMain: new Audio('/static/mp3/bgm.mp3'),
+            bgmMain: new Audio('/static/mp3/bgm-title.mp3'),
         },
         async init() {
             // TODO load last used name and game settings into game
@@ -97,11 +97,11 @@ document.addEventListener('alpine:init', () => {
                 }, 100);
 
                 // INITIALIZE AUDIO
-                window.addEventListener('mouseover', async () => {
+                window.addEventListener('click', async () => {
                     if (this.canPlayAudio === false) {
                         this.canPlayAudio = true;
-                        await(1000);
-                        // this.playSound('bgmMain', true, 0.75)
+                        await sleep(500);
+                        this.playSound('bgmMain', true, 0.75)
                     }
                 })
 
