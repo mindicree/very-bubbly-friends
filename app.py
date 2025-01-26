@@ -100,6 +100,7 @@ def event_create_new_game(json):
         json['round_start'] = False
         json['questions'] = {}
         json['timer'] = 0
+        json['finished'] = False
 
         # ADD TO GAME LIST
         games[json['id']] = json

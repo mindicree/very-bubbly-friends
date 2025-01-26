@@ -441,6 +441,36 @@ document.addEventListener('alpine:init', () => {
             // SHOW POINTS AND WINNER
             // EMIT TO ALL CONNECTED DEVICES TO DISCONNECT AND REMOVE GAME
             if (finalRound) {
+                this.roundText = 'And the bubbliest friend of them all is...';
+
+                await sleep(3000);
+
+                // TODO plays sound
+
+                let winner = this.players.sort((a, b) => b.score - a.score)[0]
+
+                this.roundText = `${winner.name}!!!`
+
+                this.socket.emit('complete-game', {
+                    game_id: this.gameState['id'],
+                })
+
+                await sleep(3000);
+
+                this.$refs.modalScores.showModal();
+
+                await sleep(10000);
+
+                this.$refs.modalScores.close();
+
+                await sleep(1000);
+
+                this.roundText = `Congratulations, ${winner.name}! You're the bubbliest!`;
+
+                await sleep(3000);
+
+                this.gameState['finished'] = true;
+
                 return;
             }
 
@@ -454,7 +484,7 @@ document.addEventListener('alpine:init', () => {
             // SHOW SCORES
             this.$refs.modalScores.showModal();
 
-            await sleep(60000);
+            await sleep(5000);
 
             this.$refs.modalScores.close();
 
@@ -476,6 +506,39 @@ document.addEventListener('alpine:init', () => {
             setTimeout(() => {
                 r.modalQuestion.close();
             }, cooldown);
+        },
+        async resetGame() {
+            this.loading = true;
+            this.setCurrentScene('loading')
+            this.gameState = null,
+            this.player = {
+                name: '',
+            }
+            this.players = {}
+            this.newGame = {
+                name: '',
+                rounds: 3,
+                round_duration: 60,
+                max_players: 20,
+                bubble_speed: 200,
+                bubble_summon: 1000,
+            },
+
+            this.gameCreator = false
+        
+            this.gameListFetchInterval = null
+            this.gamePassword = ''
+
+            this.inLobby = false
+            this.lobbyFetchInterval = null
+
+            this.bubbleCreationInterval = null
+            this.bubbleMovementInterval = null
+            this.bubbleMovementIterations = 0
+
+            await sleep(1000)
+
+            this.setCurrentScene('home');
         },
         // LOCAL STATE GAME FUNCTIONS
         // SCENE FUNCTIONS
